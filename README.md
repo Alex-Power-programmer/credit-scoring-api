@@ -18,7 +18,7 @@ markdown
 ### 1. Клонирование репозитория
 Откройте терминал и скачайте проект на свой компьютер:
 ```bash
-git clone https://github.com/Alex-Power-programmer/credit-scoring-api
+git clone https://github.com/Alex-Power-programmer/credit-scoring-api.git
 cd credit-scoring-api
 ```
 
