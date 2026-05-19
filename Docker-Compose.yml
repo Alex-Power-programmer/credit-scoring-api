@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  # Наш первый контейнер — База данных
+  db:
+    image: postgres:15
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: '1324'
+      POSTGRES_DB: credit_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  # Наш второй контейнер — Кредитное API
+  web_api:
+    build: .
+    container_name: credit_api_container
+    ports:
+      - "8000:8000"
+    environment:
+      PYTHONPATH: /code
+    depends_on:
+      - db  # API не запустится, пока не поднимется база данных db
+    # Теперь в utils.py хостом базы данных можно будет указать просто имя сервиса: "db"
+
+volumes:
+  postgres_data:  # Чтобы данные из базы не стирались при выключении контейнера
